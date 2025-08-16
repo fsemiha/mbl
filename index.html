@@ -2303,30 +2303,78 @@
             '.scoreboard-img, .final-back-btn, .continue-btn, [onclick]'
         );
         
+        console.log(`🔧 Touch desteği ekleniyor: ${clickableElements.length} element`);
+        
         clickableElements.forEach(element => {
+            // Daha önce touch support eklenmişse skip et
+            if (element.hasAttribute('data-touch-enabled')) {
+                return;
+            }
+            element.setAttribute('data-touch-enabled', 'true');
+            
             // Touch start ve end event'leri ekle
+            let touchStarted = false;
+            
             element.addEventListener('touchstart', function(e) {
+                touchStarted = true;
                 this.classList.add('touching');
                 // Haptic feedback (titreşim) - sadece destekleyen cihazlarda
                 if ('vibrate' in navigator) {
-                    navigator.vibrate(10);
+                    navigator.vibrate(20);
                 }
+                // Visual feedback için scale efekti
+                this.style.transform = 'scale(0.95)';
+                this.style.transition = 'transform 0.1s ease';
             }, {passive: true});
             
             element.addEventListener('touchend', function(e) {
-                this.classList.remove('touching');
-                // Çift tıklamayı engellemek için
-                e.preventDefault();
-            }, {passive: false});
+                if (touchStarted) {
+                    this.classList.remove('touching');
+                    this.style.transform = '';
+                    touchStarted = false;
+                    
+                    // Touch end'de click eventi tetikle
+                    setTimeout(() => {
+                        if (this.onclick) {
+                            this.onclick(e);
+                        } else if (this.id) {
+                            // ID'li elementler için özel handling
+                            this.click();
+                        }
+                    }, 50);
+                }
+            }, {passive: true});
             
             element.addEventListener('touchcancel', function(e) {
                 this.classList.remove('touching');
+                this.style.transform = '';
+                touchStarted = false;
+            }, {passive: true});
+            
+            // Touch move'da element dışına çıkılırsa cancel et
+            element.addEventListener('touchmove', function(e) {
+                const touch = e.touches[0];
+                const rect = this.getBoundingClientRect();
+                const isOutside = touch.clientX < rect.left || touch.clientX > rect.right || 
+                                touch.clientY < rect.top || touch.clientY > rect.bottom;
+                
+                if (isOutside && touchStarted) {
+                    this.classList.remove('touching');
+                    this.style.transform = '';
+                    touchStarted = false;
+                }
             }, {passive: true});
         });
         
         // Input alanları için özel touch desteği
         const inputs = document.querySelectorAll('input');
         inputs.forEach(input => {
+            // Daha önce eklenmişse skip et
+            if (input.hasAttribute('data-input-touch-enabled')) {
+                return;
+            }
+            input.setAttribute('data-input-touch-enabled', 'true');
+            
             // iOS Safari'de zoom'u engellemek için
             input.addEventListener('touchstart', function(e) {
                 // Input focus olduğunda sayfa zoom'unu engelle
@@ -2361,6 +2409,22 @@
             
             // Mobil için ek optimizasyonlar
             document.body.classList.add('mobile-device');
+            
+            // Dinamik içerik için touch desteği yenileme
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'childList') {
+                        // Yeni eklenen elementler için touch desteği ekle
+                        setTimeout(() => addTouchSupport(), 100);
+                    }
+                });
+            });
+            
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+            
         } else {
             console.log('🖥️ Masaüstü cihaz tespit edildi');
         }
