@@ -984,22 +984,8 @@
         
                                   // Phishing testine geçiş butonu
          if (e.target.closest('#phishing-test-btn')) {
-             // Tüm panelleri gizle
-             document.getElementById('main-panel').style.display = 'none';
-             document.getElementById('username-panel').style.display = 'none';
-             document.getElementById('password-panel').style.display = 'none';
-             document.getElementById('share-panel').style.display = 'none';
-             document.getElementById('final-score-panel').style.display = 'none';
-             if (document.getElementById('scoreboard-panel')) {
-                 document.getElementById('scoreboard-panel').style.display = 'none';
-             }
-             
-             // Sadece phishing panelini göster
-             document.getElementById('phishing-panel').style.display = 'flex';
-             
-             // İlk phishing sorusunu başlat
-             currentPhishingQuestion = 0;
-             showNextPhishingQuestion();
+             // showPhishingPanel fonksiyonunu çağır - duplicate önlemek için
+             showPhishingPanel();
          }
          
          // Ana ekrana dön butonu
@@ -2277,9 +2263,6 @@
              // Sadece phishing panelini göster
              document.getElementById('phishing-panel').style.display = 'flex';
              
-             // İlk phishing sorusunu başlat
-             currentPhishingQuestion = 0;
-             
              // 5 saniye timeout - eğer phishing test 5 saniyede yüklenmezse atla
              const timeoutId = setTimeout(() => {
                  console.log("⏰ Phishing test yükleme timeout - otomatik atlama");
@@ -2416,6 +2399,10 @@
                                     document.getElementById('check-password-btn').onclick();
                                 }
                             }
+                        } else if (this.classList.contains('phishing-button')) {
+                            // Phishing butonları için özel handling - event delegation kullanıyor, manuel tetikleme YAPMA
+                            console.log('🚫 Phishing buton touch - event delegation kullanıyor, manuel tetiklenmeyecek');
+                            return; // Exit early, normal click event çalışsın
                         } else if (this.onclick) {
                             this.onclick(e);
                         } else {
