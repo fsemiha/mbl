@@ -86,7 +86,7 @@ body, html {
     display: flex;
     flex-direction: column;
     align-items: center;
-    z-index: 2;
+    z-index: 100;
     max-width: 100vw;
     max-height: 100vh;
     overflow: hidden;
@@ -347,20 +347,21 @@ body, html {
     }
     
     .password-check-btn-wrapper {
-        width: 90vw;
-        max-width: 300px;
-        height: 60px;
-        margin: 20px auto;
+        width: 85vw;
+        max-width: 280px;
+        height: 50px;
+        margin: 12px auto;
     }
     
     .password-check-btn {
-        height: 60px;
+        height: 50px;
     }
     
     .password-input-wrapper {
-        width: 90vw;
-        max-width: 320px;
-        margin: 15px auto;
+        width: 85vw;
+        max-width: 300px;
+        margin: 8px auto;
+        min-height: 40px;
     }
     
     .svg-box {
@@ -388,6 +389,8 @@ body, html {
     justify-content: flex-start;
     overflow: hidden;
     min-height: 500px;
+    background: linear-gradient(135deg, #0a1428 0%, #1a2844 50%, #2a3c66 100%);
+    z-index: 200;
 }
 
 .password-panel-bg {
@@ -409,9 +412,9 @@ body, html {
     box-sizing: border-box;
 }
 .security-icon {
-    width: 52px;
+    width: 45px;
     height: auto;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 .password-time, .password-score {
     display: flex;
@@ -464,40 +467,40 @@ body, html {
 }
 .password-panel-content {
     position: absolute;
-    top: 150px;
+    top: 140px;
     left: 0;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     z-index: 2;
-    min-height: 300px;
-    max-height: calc(100vh - 250px);
+    min-height: 280px;
+    max-height: calc(100vh - 220px);
     overflow-y: auto;
     justify-content: flex-start;
-    padding: 15px;
+    padding: 12px;
     box-sizing: border-box;
 }
 
 /* Paylaş/Sakla panel hizalama düzeltmesi */
 #share-panel .password-panel-content {
-    top: 150px;
+    top: 140px;
     justify-content: flex-start;
-    min-height: 300px;
-    max-height: calc(100vh - 250px);
+    min-height: 280px;
+    max-height: calc(100vh - 220px);
     overflow-y: auto;
-    padding: 15px;
+    padding: 12px;
     box-sizing: border-box;
 }
 
 /* Phishing panel hizalama düzeltmesi */
 #phishing-panel .password-panel-content {
-    top: 150px;
+    top: 140px;
     justify-content: flex-start;
-    min-height: 300px;
-    max-height: calc(100vh - 250px);
+    min-height: 280px;
+    max-height: calc(100vh - 220px);
     overflow-y: auto;
-    padding: 15px;
+    padding: 12px;
     box-sizing: border-box;
 }
 
@@ -510,30 +513,30 @@ body, html {
     margin-bottom: 6px;
 }
 .password-title {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-family: 'Conthrax', 'Gilmer', Arial, sans-serif;
     font-weight: bold;
     color: #fff;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     letter-spacing: 1px;
     text-align: center;
 }
 .password-desc {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: #fff;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     text-align: center;
     font-family: 'Gilmer Light', Arial, sans-serif;
     font-weight: 300;
     line-height: 1.3;
 }
 .password-input-wrapper {
-    width: 85%;
-    max-width: 400px;
-    margin: 15px auto;
+    width: 75%;
+    max-width: 320px;
+    margin: 10px auto;
     position: relative;
     z-index: 5;
-    min-height: 50px;
+    min-height: 45px;
 }
 .password-input {
     color: #000;
@@ -541,10 +544,10 @@ body, html {
 }
 .password-check-btn-wrapper {
     position: relative;
-    width: 300px;
-    max-width: 90vw;
-    height: 65px;
-    margin: 25px auto;
+    width: 250px;
+    max-width: 80vw;
+    height: 55px;
+    margin: 15px auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -554,7 +557,7 @@ body, html {
 }
 .password-check-btn {
     width: 100%;
-    height: 65px;
+    height: 55px;
     display: block;
     cursor: pointer;
     pointer-events: auto;
@@ -670,18 +673,19 @@ body, html {
         max-height: calc(80vh - 160px);
     }
     .password-check-btn-wrapper {
-        width: 95vw;
-        max-width: 280px;
-        height: 55px;
-        margin: 15px auto;
+        width: 90vw;
+        max-width: 260px;
+        height: 48px;
+        margin: 10px auto;
     }
     .password-check-btn {
-        height: 55px;
+        height: 48px;
     }
     .password-input-wrapper {
-        width: 95vw;
-        max-width: 300px;
-        margin: 12px auto;
+        width: 90vw;
+        max-width: 280px;
+        margin: 8px auto;
+        min-height: 38px;
     }
     .svg-box {
         width: 35vw;
@@ -760,18 +764,19 @@ body, html {
         max-height: calc(75vh - 140px);
     }
     .password-check-btn-wrapper {
-        width: 98vw;
-        max-width: 250px;
-        height: 50px;
-        margin: 10px auto;
+        width: 95vw;
+        max-width: 230px;
+        height: 45px;
+        margin: 8px auto;
     }
     .password-check-btn {
-        height: 50px;
+        height: 45px;
     }
     .password-input-wrapper {
-        width: 98vw;
-        max-width: 270px;
-        margin: 8px auto;
+        width: 95vw;
+        max-width: 250px;
+        margin: 6px auto;
+        min-height: 35px;
     }
     .svg-box {
         width: 40vw;

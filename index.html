@@ -772,7 +772,17 @@
         // Username'i global değişkene kaydet
         currentUsername = username;
         
+        // Tüm panelleri gizle
+        document.getElementById('main-panel').style.display = 'none';
         document.getElementById('username-panel').style.display = 'none';
+        document.getElementById('share-panel').style.display = 'none';
+        document.getElementById('phishing-panel').style.display = 'none';
+        document.getElementById('final-score-panel').style.display = 'none';
+        if (document.getElementById('scoreboard-panel')) {
+            document.getElementById('scoreboard-panel').style.display = 'none';
+        }
+        
+        // Sadece password panelini göster
         document.getElementById('password-panel').style.display = 'flex';
         startTimer();
         setScore(0);
@@ -955,7 +965,17 @@
     // PAYLAŞ/SAKLA butonuna tıklanınca panel geçişi
     document.addEventListener('click', function(e) {
         if (e.target.closest('#next-task-btn')) {
+            // Tüm panelleri gizle
+            document.getElementById('main-panel').style.display = 'none';
+            document.getElementById('username-panel').style.display = 'none';
             document.getElementById('password-panel').style.display = 'none';
+            document.getElementById('phishing-panel').style.display = 'none';
+            document.getElementById('final-score-panel').style.display = 'none';
+            if (document.getElementById('scoreboard-panel')) {
+                document.getElementById('scoreboard-panel').style.display = 'none';
+            }
+            
+            // Sadece share panelini göster
             document.getElementById('share-panel').style.display = 'flex';
             
             // Yeni share panel sistemini başlat
@@ -964,7 +984,17 @@
         
                                   // Phishing testine geçiş butonu
          if (e.target.closest('#phishing-test-btn')) {
+             // Tüm panelleri gizle
+             document.getElementById('main-panel').style.display = 'none';
+             document.getElementById('username-panel').style.display = 'none';
+             document.getElementById('password-panel').style.display = 'none';
              document.getElementById('share-panel').style.display = 'none';
+             document.getElementById('final-score-panel').style.display = 'none';
+             if (document.getElementById('scoreboard-panel')) {
+                 document.getElementById('scoreboard-panel').style.display = 'none';
+             }
+             
+             // Sadece phishing panelini göster
              document.getElementById('phishing-panel').style.display = 'flex';
              
              // İlk phishing sorusunu başlat
@@ -2215,8 +2245,17 @@
         
                  // Share panel fonksiyonu - phishing'ten geri dönüş için
          window.showSharePanel = function() {
+             // Tüm panelleri gizle
+             document.getElementById('main-panel').style.display = 'none';
+             document.getElementById('username-panel').style.display = 'none';
              document.getElementById('password-panel').style.display = 'none';
              document.getElementById('phishing-panel').style.display = 'none';
+             document.getElementById('final-score-panel').style.display = 'none';
+             if (document.getElementById('scoreboard-panel')) {
+                 document.getElementById('scoreboard-panel').style.display = 'none';
+             }
+             
+             // Sadece share panelini göster
              document.getElementById('share-panel').style.display = 'flex';
              displayShareQuestions();
          };
@@ -2225,7 +2264,17 @@
          window.showPhishingPanel = function() {
              console.log("🎮 Phishing paneline geçiliyor...");
              
+             // Tüm panelleri gizle
+             document.getElementById('main-panel').style.display = 'none';
+             document.getElementById('username-panel').style.display = 'none';
+             document.getElementById('password-panel').style.display = 'none';
              document.getElementById('share-panel').style.display = 'none';
+             document.getElementById('final-score-panel').style.display = 'none';
+             if (document.getElementById('scoreboard-panel')) {
+                 document.getElementById('scoreboard-panel').style.display = 'none';
+             }
+             
+             // Sadece phishing panelini göster
              document.getElementById('phishing-panel').style.display = 'flex';
              
              // İlk phishing sorusunu başlat
@@ -2337,15 +2386,25 @@
                     setTimeout(() => {
                         // Özel ID'ler için direct handling
                         if (this.id === 'start-btn') {
+                            // Tüm panelleri gizle
                             document.getElementById('main-panel').style.display = 'none';
+                            document.getElementById('password-panel').style.display = 'none';
+                            document.getElementById('share-panel').style.display = 'none';
+                            document.getElementById('phishing-panel').style.display = 'none';
+                            document.getElementById('final-score-panel').style.display = 'none';
+                            if (document.getElementById('scoreboard-panel')) {
+                                document.getElementById('scoreboard-panel').style.display = 'none';
+                            }
+                            
+                            // Sadece username panelini göster
                             document.getElementById('username-panel').style.display = 'flex';
                         } else if (this.id === 'play-btn') {
                             const usernameInput = document.getElementById('username-input');
                             const username = usernameInput.value.trim();
                             if (username) {
                                 localStorage.setItem('playerUsername', username);
-                                document.getElementById('username-panel').style.display = 'none';
-                                document.getElementById('main-panel').style.display = 'flex';
+                                // Oyun başlatma fonksiyonunu çağır (parola paneline geç)
+                                document.getElementById('play-btn').onclick();
                             }
                         } else if (this.id === 'check-password-btn' || this.classList.contains('password-check-btn')) {
                             // Password check buton özel handling
