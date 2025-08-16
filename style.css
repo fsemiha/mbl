@@ -1018,8 +1018,8 @@ body, html {
     }
 }
 
-/* Mobil cihazlarda arka plan çerçevelerini gizle */
-@media (max-width: 768px) {
+/* SADECE mobil cihazlarda arka plan çerçevelerini gizle - Desktop'u etkilemez */
+@media (max-width: 768px) and (pointer: coarse) {
     /* Ana arka plan çerçevesini mobilde gizle */
     .background-img {
         opacity: 0.3 !important;
@@ -1602,24 +1602,47 @@ body, html {
     scroll-padding-top: 20px;
 }
 
-/* Mobil cihaz algılandığında özel kurallar */
-.mobile-device .password-panel-bg {
+/* SADECE GERÇEK mobil cihazlarda özel kurallar - Desktop etkilenmez */
+body.mobile-device .password-panel-bg {
     display: none !important;
 }
 
-.mobile-device .svg-bg {
+body.mobile-device .svg-bg {
     opacity: 0.15 !important;
 }
 
-.mobile-device .background-img {
+body.mobile-device .background-img {
     opacity: 0.25 !important;
 }
 
-.mobile-device .password-panel-outer {
+body.mobile-device .password-panel-outer {
     background: linear-gradient(135deg, #0a1428 0%, #1a2844 70%, #2a3c66 100%) !important;
     border: 2px solid rgba(138, 43, 226, 0.7);
     border-radius: 12px;
     box-shadow: 0 0 25px rgba(138, 43, 226, 0.4);
+}
+
+/* Desktop'ta eski güzel çerçeveler korunur */
+@media (min-width: 769px) and (pointer: fine) {
+    .password-panel-bg {
+        display: block !important;
+        opacity: 1 !important;
+    }
+    
+    .svg-bg {
+        opacity: 1 !important;
+    }
+    
+    .background-img {
+        opacity: 1 !important;
+    }
+    
+    .password-panel-outer {
+        background: transparent !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+    }
 }
 
 /* Ekstra Touch Area İyileştirmeleri */

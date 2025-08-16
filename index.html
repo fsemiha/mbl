@@ -2476,19 +2476,38 @@
     
     // Mobil cihaz tespiti
     function isMobileDevice() {
-        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
-               window.innerWidth <= 768 ||
-               'ontouchstart' in window;
+        // User Agent kontrolü - gerçek mobil cihazlar
+        const mobileUserAgent = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        // Touch desteği + küçük ekran - ama sadece gerçekten mobil ise
+        const isTouchDevice = 'ontouchstart' in window;
+        const isSmallScreen = window.innerWidth <= 768;
+        const hasCoarsePointer = window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
+        
+        // Sadece gerçekten mobil cihazlar için true döndür
+        return mobileUserAgent || (isTouchDevice && isSmallScreen && hasCoarsePointer);
     }
     
     // Touch events'i yükle
     document.addEventListener('DOMContentLoaded', function() {
-        if (isMobileDevice()) {
-            console.log('📱 Mobil cihaz tespit edildi - Touch desteği aktifleştiriliyor');
+        const isMobile = isMobileDevice();
+        console.log('🔍 Cihaz tespiti:', {
+            isMobile: isMobile,
+            userAgent: navigator.userAgent,
+            screenWidth: window.innerWidth,
+            touchSupport: 'ontouchstart' in window,
+            pointerType: window.matchMedia ? window.matchMedia("(pointer: coarse)").matches : 'unknown'
+        });
+        
+        if (isMobile) {
+            console.log('📱 Mobil cihaz tespit edildi - Touch desteği ve temiz çerçeve aktifleştiriliyor');
             addTouchSupport();
             
             // Mobil için ek optimizasyonlar
             document.body.classList.add('mobile-device');
+        } else {
+            console.log('🖥️ Desktop cihaz tespit edildi - Eski çerçeveler korunuyor');
+        }
             
             // Dinamik içerik için touch desteği yenileme
             const observer = new MutationObserver(function(mutations) {
