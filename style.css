@@ -380,15 +380,15 @@ body, html {
     position: relative;
     width: 1000px;
     max-width: 95vw;
-    height: 800px;
-    max-height: 95vh;
+    height: 600px;
+    max-height: 80vh;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    overflow: hidden;
-    min-height: 500px;
+    overflow: visible;
+    min-height: 400px;
     background: linear-gradient(135deg, #0a1428 0%, #1a2844 50%, #2a3c66 100%);
     z-index: 200;
 }
@@ -477,6 +477,10 @@ body, html {
     min-height: 280px;
     max-height: calc(100vh - 220px);
     overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    overscroll-behavior: contain;
     justify-content: flex-start;
     padding: 12px;
     box-sizing: border-box;
@@ -662,15 +666,17 @@ body, html {
         min-height: 45px;
     }
     .password-panel-content {
-        top: 105px;
-        padding: 8px;
-        max-height: calc(80vh - 160px);
+        top: 80px;
+        padding: 6px;
+        max-height: calc(65vh - 120px);
+        min-height: 200px;
     }
     #share-panel .password-panel-content,
     #phishing-panel .password-panel-content {
-        top: 105px;
-        padding: 8px;
-        max-height: calc(80vh - 160px);
+        top: 80px;
+        padding: 6px;
+        max-height: calc(65vh - 120px);
+        min-height: 200px;
     }
     .password-check-btn-wrapper {
         width: 90vw;
@@ -753,15 +759,17 @@ body, html {
         min-height: 40px;
     }
     .password-panel-content {
-        top: 90px;
-        padding: 6px;
-        max-height: calc(75vh - 140px);
+        top: 70px;
+        padding: 4px;
+        max-height: calc(60vh - 100px);
+        min-height: 180px;
     }
     #share-panel .password-panel-content,
     #phishing-panel .password-panel-content {
-        top: 90px;
-        padding: 6px;
-        max-height: calc(75vh - 140px);
+        top: 70px;
+        padding: 4px;
+        max-height: calc(60vh - 100px);
+        min-height: 180px;
     }
     .password-check-btn-wrapper {
         width: 95vw;
@@ -980,6 +988,34 @@ body, html {
     max-width: 98vw;
     height: auto;
     display: block;
+}
+
+/* Mobil cihazlarda next-task-btn küçültme */
+@media (max-width: 700px) {
+    .next-task-btn {
+        margin: 8px 0;
+        position: static;
+    }
+    
+    #next-task-btn img {
+        width: 280px;
+        max-width: 85vw;
+        height: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    #next-task-btn img {
+        width: 240px;
+        max-width: 80vw;
+    }
+}
+
+@media (max-width: 400px) {
+    #next-task-btn img {
+        width: 200px;
+        max-width: 75vw;
+    }
 }
 
 .svg-box {
@@ -1517,13 +1553,27 @@ body, html {
 /* iOS Safari için scroll bounce'u devre dışı bırak */
 .mobile-device body {
     overscroll-behavior: none;
+    overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
 }
 
 /* Android için text selection'ı iyileştir */
 .mobile-device input {
     -webkit-user-select: text;
     user-select: text;
+}
+
+/* Password panel'da scroll davranışını düzelt */
+#password-panel {
+    overscroll-behavior: contain;
+    scroll-behavior: smooth;
+}
+
+#password-panel .password-panel-content {
+    overscroll-behavior: contain;
+    scroll-behavior: smooth;
+    scroll-padding-top: 20px;
 }
 
 /* Ekstra Touch Area İyileştirmeleri */
