@@ -1018,6 +1018,32 @@ body, html {
     }
 }
 
+/* Mobil cihazlarda arka plan çerçevelerini gizle */
+@media (max-width: 768px) {
+    /* Ana arka plan çerçevesini mobilde gizle */
+    .background-img {
+        opacity: 0.3 !important;
+    }
+    
+    /* Panel arka plan çerçevelerini mobilde gizle */
+    .password-panel-bg {
+        display: none !important;
+    }
+    
+    /* Icon arka plan çerçevelerini mobilde gizle */
+    .svg-bg {
+        opacity: 0.2 !important;
+    }
+    
+    /* Panel outer'da gradient arka plan daha güçlü yap */
+    .password-panel-outer {
+        background: linear-gradient(135deg, #0a1428 0%, #1a2844 70%, #2a3c66 100%) !important;
+        border: 2px solid rgba(138, 43, 226, 0.8);
+        border-radius: 15px;
+        box-shadow: 0 0 30px rgba(138, 43, 226, 0.5);
+    }
+}
+
 .svg-box {
     position: relative;
     width: 15vw;
@@ -1574,6 +1600,26 @@ body, html {
     overscroll-behavior: contain;
     scroll-behavior: smooth;
     scroll-padding-top: 20px;
+}
+
+/* Mobil cihaz algılandığında özel kurallar */
+.mobile-device .password-panel-bg {
+    display: none !important;
+}
+
+.mobile-device .svg-bg {
+    opacity: 0.15 !important;
+}
+
+.mobile-device .background-img {
+    opacity: 0.25 !important;
+}
+
+.mobile-device .password-panel-outer {
+    background: linear-gradient(135deg, #0a1428 0%, #1a2844 70%, #2a3c66 100%) !important;
+    border: 2px solid rgba(138, 43, 226, 0.7);
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(138, 43, 226, 0.4);
 }
 
 /* Ekstra Touch Area İyileştirmeleri */
