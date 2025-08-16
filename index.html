@@ -2505,9 +2505,6 @@
             
             // Mobil için ek optimizasyonlar
             document.body.classList.add('mobile-device');
-        } else {
-            console.log('🖥️ Desktop cihaz tespit edildi - Eski çerçeveler korunuyor');
-        }
             
             // Dinamik içerik için touch desteği yenileme
             const observer = new MutationObserver(function(mutations) {
@@ -2523,9 +2520,8 @@
                 childList: true,
                 subtree: true
             });
-            
         } else {
-            console.log('🖥️ Masaüstü cihaz tespit edildi');
+            console.log('🖥️ Desktop cihaz tespit edildi - Eski çerçeveler korunuyor');
         }
     });
     
