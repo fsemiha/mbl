@@ -2299,8 +2299,8 @@
     function addTouchSupport() {
         // Tüm clickable elementlere touch support ekle
         const clickableElements = document.querySelectorAll(
-            '.main-btn-svg, .password-check-btn, .share-button, .phishing-button, ' +
-            '.scoreboard-img, .final-back-btn, .continue-btn, [onclick]'
+            '.main-btn-svg, .start-svg, .password-check-btn, .share-button, .phishing-button, ' +
+            '.scoreboard-img, .final-back-btn, .continue-btn, [onclick], #start-btn, #play-btn'
         );
         
         console.log(`🔧 Touch desteği ekleniyor: ${clickableElements.length} element`);
@@ -2335,10 +2335,31 @@
                     
                     // Touch end'de click eventi tetikle
                     setTimeout(() => {
-                        if (this.onclick) {
+                        // Özel ID'ler için direct handling
+                        if (this.id === 'start-btn') {
+                            document.getElementById('main-panel').style.display = 'none';
+                            document.getElementById('username-panel').style.display = 'flex';
+                        } else if (this.id === 'play-btn') {
+                            const usernameInput = document.getElementById('username-input');
+                            const username = usernameInput.value.trim();
+                            if (username) {
+                                localStorage.setItem('playerUsername', username);
+                                document.getElementById('username-panel').style.display = 'none';
+                                document.getElementById('main-panel').style.display = 'flex';
+                            }
+                        } else if (this.id === 'check-password-btn' || this.classList.contains('password-check-btn')) {
+                            // Password check buton özel handling
+                            const password = document.getElementById('password-input-1').value;
+                            const confirmPassword = document.getElementById('password-input-2').value;
+                            if (password && confirmPassword && password === confirmPassword) {
+                                // Orijinal fonksiyonu çağır
+                                if (document.getElementById('check-password-btn').onclick) {
+                                    document.getElementById('check-password-btn').onclick();
+                                }
+                            }
+                        } else if (this.onclick) {
                             this.onclick(e);
-                        } else if (this.id) {
-                            // ID'li elementler için özel handling
+                        } else {
                             this.click();
                         }
                     }, 50);
