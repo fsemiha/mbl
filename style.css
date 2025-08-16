@@ -312,6 +312,20 @@ body, html {
         min-height: 50px;
     }
     
+    /* Share buttons mobilde 2 sütun 5 satır */
+    .share-buttons-container {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        gap: 15px;
+        padding: 15px;
+        max-width: 95vw;
+    }
+    
+    .share-button {
+        width: 180px;
+        max-width: 90vw;
+    }
+    
     /* Username input mobile optimization */
     .username-input-on-svg {
         font-size: 0.95rem;
@@ -406,9 +420,9 @@ body, html {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 50px;
+    padding: 20px 70px;
     z-index: 5;
-    min-height: 60px;
+    min-height: 70px;
     box-sizing: border-box;
 }
 .security-icon {
@@ -654,6 +668,19 @@ body, html {
         min-height: 45px;
     }
     
+    /* Share buttons 600px - 2 sütun 5 satır korunur */
+    .share-buttons-container {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        gap: 12px;
+        padding: 12px;
+    }
+    
+    .share-button {
+        width: 160px;
+        max-width: 85vw;
+    }
+    
     /* Password panel small screen */
     .password-panel-outer {
         width: 98vw;
@@ -745,6 +772,19 @@ body, html {
         font-size: 0.85rem;
         padding: 10px;
         min-height: 40px;
+    }
+    
+    /* Share buttons 400px - 2 sütun 5 satır en küçük butonlar */
+    .share-buttons-container {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        gap: 10px;
+        padding: 8px;
+    }
+    
+    .share-button {
+        width: 140px;
+        max-width: 80vw;
     }
     
     /* Çok küçük ekran password panel */
@@ -1083,13 +1123,20 @@ body, html {
 }
 
 .share-buttons-container {
-    display: flex;
-    gap: 48px;
-    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 20px;
+    justify-items: center;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 .share-button {
     width: 240px;
+    max-width: 100%;
     cursor: pointer;
     transition: transform 0.2s ease;
     /* Touch optimizations */
@@ -1644,11 +1691,11 @@ body.mobile-device .password-panel-outer {
         box-shadow: none !important;
     }
     
-    /* Desktop'ta timer ve puan pozisyonunu düzelt */
+    /* Desktop'ta timer ve puan pozisyonunu düzelt - çerçeveden uzaklaştır */
     .password-panel-top {
         top: 80px !important;
-        padding: 0 50px !important;
-        min-height: 60px !important;
+        padding: 20px 80px !important;
+        min-height: 70px !important;
     }
     
     /* Desktop'ta panel content pozisyonu */

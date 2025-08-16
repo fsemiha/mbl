@@ -1132,6 +1132,13 @@
                  // Phishing test butonları
          if (e.target.closest('.phishing-button')) {
              const button = e.target.closest('.phishing-button');
+             
+             // Buton zaten disabled ise duplicate event'i engelle
+             if (button.style.pointerEvents === 'none') {
+                 console.log("🚫 Phishing buton zaten disabled - duplicate event engellendi");
+                 return;
+             }
+             
              const isCorrect = button.getAttribute('data-answer') === 'correct';
              const explanation = document.getElementById('phishing-explanation');
              
@@ -1139,6 +1146,14 @@
                  currentQuestion: currentPhishingQuestion,
                  isCorrect: isCorrect,
                  questionText: phishingQuestions[currentPhishingQuestion]?.text
+             });
+             
+             // HEMEN butonları devre dışı bırak - duplicate önlemek için
+             const allButtons = document.querySelectorAll('.phishing-button');
+             allButtons.forEach(btn => {
+                 btn.style.pointerEvents = 'none';
+                 btn.style.opacity = '0.7';
+                 btn.style.transform = 'none';
              });
              
              // Phishing ses efektini çal
@@ -1157,14 +1172,6 @@
                  explanation.className = 'share-explanation wrong';
                  console.log("❌ Yanlış cevap! -5 puan");
              }
-             
-             // Butonları devre dışı bırak
-             const allButtons = document.querySelectorAll('.phishing-button');
-             allButtons.forEach(btn => {
-                 btn.style.pointerEvents = 'none';
-                 btn.style.opacity = '0.7';
-                 btn.style.transform = 'none';
-             });
              
                          // 4 saniye sonra bir sonraki soruya geç (çocukların açıklamayı okuyabilmesi için)
             setTimeout(() => {
